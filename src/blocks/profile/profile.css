@@ -1,0 +1,16 @@
+.profile {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+}
+.button__edit {
+  width: 38px;
+  height: 18px;
+  font-size: 12px;
+  line-height: 15px;
+  color: white;
+  background-color: black;
+  border: 1px solid #FFFFFF;
+  margin-top: 26px;
+  align-items: center;
+}

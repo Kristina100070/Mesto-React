@@ -1,0 +1,30 @@
+.popup__content {
+  width: 430px;
+  min-height: 330px;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+  box-sizing: border-box;
+  padding: 34px 36px;
+}
+
+@media screen and (max-width: 540px) {
+  .popup__content {
+    width: calc(100% - 60px);
+  }
+}
+.popup__image {
+  width: auto; 
+  height: 100%; 
+  max-width: 80vw; 
+  max-height: 80vh; 
+  min-height: inherit; 
+  padding: 0;
+}
+.popup__image_big {
+  width: auto; 
+  height: 100%; 
+  display: block; 
+  margin: 0; 
+  border-radius: 10px;
+}
