@@ -26,14 +26,17 @@ function handleSubmit(e) {
 } 
 
 function handleName(e) {
-  setName(e.target.value)
-  
+  setName(e.target.value);
+  props.formValidation(e);
 }
 function handleDescription(e) {
-  setDescription(e.target.value)
+  setDescription(e.target.value);
+  props.formValidation(e);
+
 }
     return(
 <PopupWithForm 
+formValid={props.formValid}
 onSubmit={handleSubmit}
   isOpen={props.isOpen ? "" : "popup_is-opened" } 
   onClose={props.onClose} 
@@ -45,7 +48,7 @@ onSubmit={handleSubmit}
           <div>
           <input onChange={handleName} id="nameinfo" 
          type="text"
-          name="name" 
+          name="userName" 
           className="popup__input popup__input_type_nameinfo" 
           placeholder="Имя"
           defaultValue={name}

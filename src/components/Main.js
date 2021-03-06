@@ -3,9 +3,7 @@ import Card from './Card';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import { CardListContext } from './contexts/CardListContext';
 
-
-
-const Main = React.memo((props) => {
+function Main(props) {
 const currentUser = React.useContext(CurrentUserContext);
 const cardList = React.useContext(CardListContext);
 console.log(cardList);
@@ -32,7 +30,7 @@ console.log(cardList);
 </div>
   </>
     );
-})
+}
 export default Main;
 
 

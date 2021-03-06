@@ -14,6 +14,7 @@ function EditAvatarPopup(props) {
 
     return(  
 <PopupWithForm 
+formValid={props.formValid}
 onSubmit={handleSubmit}
 isOpen={!props.isOpen ? "popup_is-opened" : "" } 
 onClose={props.onClose} 
@@ -28,7 +29,9 @@ children={
           className="popup__input popup__input_type_link-url"
           ref={avatarRef}
           required 
-          minLength="2" />
+          minLength="2"
+          
+          onChange={props.formValidation} />
           <span id="error" className="error"></span></div>
        } />
 )

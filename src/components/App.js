@@ -15,20 +15,28 @@ function App() {
    const [currentUser, setСurrentUser] = React.useState({});
    const [cardList, setCardList] = React.useState([]);
 
+   const ERROR_MESSAGES = {
+    typeMismatch: 'Здесь должна быть ссылка',
+    tooShort: 'Должно быть от 2 до 30 символов',
+    tooLong: 'Должно быть от 2 до 30 символов',
+    valueMissing: 'Это обязательное поле',
+    noError: '',
+  }; 
+
 React.useEffect(() => {
       Api.getUserInfo()
       .then((data) => {
         setСurrentUser(data);
         
       });
-});
+}, []);
 
 React.useEffect(() => {
     Api.getInitialCards()
   .then((data) => {
     setCardList(data);
     });
-});
+}, []);
 
 function handleEditAvatarClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen); 
@@ -79,6 +87,15 @@ function handleAddPlaceSubmit(data) {
   })
   setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
 }
+function formValidation(e) {
+  const error = e.target.closest('div').querySelector('.error');
+  for (let key in ERROR_MESSAGES){
+    if (e.target.validity[key]) {
+      return error.textContent = ERROR_MESSAGES[key]
+    }
+  }
+  error.textContent = ERROR_MESSAGES.noError;
+}
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
@@ -90,9 +107,9 @@ function handleAddPlaceSubmit(data) {
       onAddPlace={handleEditProfileClick} 
       onEditAvatar={handleAddPlaceClick} />  
      
-      <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}></EditProfilePopup>
-      <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
-      <AddPlacePopup onAddPlace={handleAddPlaceSubmit} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+      <EditProfilePopup formValidation={formValidation} onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}></EditProfilePopup>
+      <EditAvatarPopup formValidation={formValidation} onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+      <AddPlacePopup formValidation={formValidation} onAddPlace={handleAddPlaceSubmit} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
       
       </CardListContext.Provider>        
       </CurrentUserContext.Provider>

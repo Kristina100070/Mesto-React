@@ -18,20 +18,21 @@ function AddPlacePopup(props) {
     } 
     
     function handleName(e) {
-        setCardName(e.target.value)
-      console.log(cardName);
+        setCardName(e.target.value);
+        props.formValidation(e);
     }
     function handleLink(e) {
-        setCardLink(e.target.value)
+        setCardLink(e.target.value);
+        props.formValidation(e);
     }
     return (
 
-        <PopupWithForm onSubmit={handleSubmit} isOpen={!props.isOpen ? "popup_is-opened" : "" } onClose={props.onClose} name="card" title="Новое место" button="+" children={
+        <PopupWithForm formValid={props.formValid} onSubmit={handleSubmit} isOpen={!props.isOpen ? "popup_is-opened" : "" } onClose={props.onClose} name="card" title="Новое место" button="+" children={
             <div>
                  <input id="name"
                  onChange={handleName} 
                  type="text" 
-                 name="name"
+                 name="cardName"
           className="popup__input popup__input_type_name popup__card_name"
           placeholder="Имя карточки" 
           value={cardName}
