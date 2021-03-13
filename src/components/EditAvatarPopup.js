@@ -3,7 +3,7 @@ import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup(props) {
     const avatarRef = React.useRef();
-   
+    const [validForm, setValidForm] = React.useState(false);
     function handleSubmit(e) {
         e.preventDefault();
         props.onUpdateAvatar({
@@ -11,10 +11,14 @@ function EditAvatarPopup(props) {
         });
       } 
 
-
+      function handleAvatar(e) {
+        setValidForm(e.target.checkValidity());
+         props.formValidation(e);
+         
+       }
     return(  
 <PopupWithForm 
-formValid={props.formValid}
+validForm={validForm}
 onSubmit={handleSubmit}
 isOpen={!props.isOpen ? "popup_is-opened" : "" } 
 onClose={props.onClose} 
@@ -31,7 +35,7 @@ children={
           required 
           minLength="2"
           
-          onChange={props.formValidation} />
+          onChange={handleAvatar} />
           <span id="error" className="error"></span></div>
        } />
 )

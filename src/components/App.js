@@ -47,7 +47,7 @@ function handleEditProfileClick() {
 function handleAddPlaceClick() {
   setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen) 
 }
-function closeAllPopups() {
+function closeAllPopups(e) {
   document.querySelector('.popup_is-opened').classList.remove("popup_is-opened");
 }
 function handleCardLike(card) {
@@ -77,7 +77,7 @@ function handleUpdateAvatar(data) {
     
    document.querySelector('.user-info__photo').style.backgroundImage = `url(${res.avatar})`
   })
-  
+  setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
 }
 function handleAddPlaceSubmit(data) {
   Api.setCard(data.name, data.link)
@@ -116,5 +116,4 @@ function formValidation(e) {
     </div>
   );
 }
-
 export default App;

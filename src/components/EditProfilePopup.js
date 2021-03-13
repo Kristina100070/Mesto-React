@@ -4,10 +4,16 @@ import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 
 function EditProfilePopup(props) {
-    const [name , setName] = React.useState("Jacques Cousteau");
-    const [description , setDescription ] = React.useState("Sailor, researcher");
+  const currentUser = React.useContext(CurrentUserContext);
+    const [name , setName] = React.useState(currentUser.name);
+    const [description , setDescription ] = React.useState(currentUser.about);
 
-const currentUser = React.useContext(CurrentUserContext);
+    const [validForm, setValidForm] = React.useState({
+      validName: true,
+      validDescription: true
+    });
+
+
 
 React.useEffect(() => {
   setName(currentUser.name);
@@ -26,17 +32,21 @@ function handleSubmit(e) {
 } 
 
 function handleName(e) {
+ setValidForm({...validForm, validName: e.target.checkValidity()});
   setName(e.target.value);
   props.formValidation(e);
+  
 }
 function handleDescription(e) {
+  setValidForm({...validForm, validDescription: e.target.checkValidity()});
   setDescription(e.target.value);
   props.formValidation(e);
 
 }
+
     return(
 <PopupWithForm 
-formValid={props.formValid}
+validForm={validForm}
 onSubmit={handleSubmit}
   isOpen={props.isOpen ? "" : "popup_is-opened" } 
   onClose={props.onClose} 
